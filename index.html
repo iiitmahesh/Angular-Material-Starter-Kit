@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="Hiring Challenge " content=" Hiring Challenge " />
+    <meta name="description" content=" Hiring Challenge" />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Hiring Challenge</title>
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,100,700%7Dosis:400,500" rel="stylesheet">
+    <link href="bower_components/angular-material/angular-material.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="app/styles/style.css" rel="stylesheet" />
+</head>
+
+<body ng-app="myApp" ng-cloak layout="row" style="background: whitesmoke;">
+    <div layout="column" layout-fill>
+        <div layout="column" layout-fill>
+            <header>
+                <md-toolbar class="appThemeBGcolor" ng-controller="toolbarCtrl">
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button">
+                            <md-icon md-font-set="material-icons" style="color:#fff;"> menu </md-icon>
+                            <md-tooltip>Menu</md-tooltip>
+                        </md-button>
+                        <h2><span style="color:#fff;" id="appName">{{appData.title}} </span></h2>
+                        <p style="font-size:12px;" id="appTagLine"> &nbsp;&nbsp;&nbsp;&nbsp; {{appData.subtitle}}</p>
+                        <span flex></span>
+                        <md-button class="md-icon-button" ng-repeat="item in toolbarElements" ng-click="showAlert($event)"aria-label="{{item.name}}" >
+                            <md-icon md-font-set="material-icons" style="color:#fff;"> {{item.icon}} </md-icon>
+                            <md-tooltip>{{item.name}}</md-tooltip>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+            </header>
+
+            <div>
+                <main layout="row" flex>
+                    <md-content flex id="content" layout-xs="column">
+                        <div class="fade-view" ui-view>
+                            <!-- UI VIEW -->
+                        </div>
+                    </md-content>
+                </main>
+            </div>
+            <!-- Site Header Start from here -->
+            <!-- angular and its other modules loding -->
+            <script src="bower_components/angular/angular.js"></script>
+            <script src="bower_components/angular-aria/angular-aria.js"></script>
+            <script src="bower_components/angular-animate/angular-animate.js"></script>
+            <script src="bower_components/angular-material/angular-material.min.js"></script>
+            <script src="bower_components/angular-messages/angular-messages.js"></script>
+            <script src="bower_components/angular-ui-router/angular-ui-router.min.js"></script>
+            <!-- <script src="bower_components/angular-material-icons/angular-material-icons..js"></script> -->
+            <!-- Custom scripts  -->
+            <script src="app/app.js"></script>
+            <script src="app/services.js"></script>
+            <script src="app/controllers/indexCtrl.js"></script>
+            <script src="app/controllers/homeCtrl.js"></script>
+</body>
+
+</html>

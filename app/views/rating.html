@@ -1,0 +1,12 @@
+<span tabindex="0">
+    <!-- <span ng-repeat="r in range track by $index" class="sr-only">{{ $index < rate ? '*' : ' ' }} -->
+
+<md-icon ng-repeat="r in range track by $index" md-font-set="material-icons" class=" appThemecolor">
+ {{ $index+1 <= rate ? 'star' : ($index+1-rate < 1 ? 'star_half':'star_border')  }} </md-icon>
+
+<!-- <span>{{$index-rating}}</span> -->
+
+<!-- 
+<span ng-repeat="r in range track by $index">{{ $index+1 <= rate ? 'star' : ($index+1-rate < 1 ? 'star_half':'star_border')  }}{{$index-rate}} </span> -->
+</span>
+

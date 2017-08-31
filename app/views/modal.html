@@ -1,0 +1,24 @@
+<md-dialog aria-label="Add" style="width:25%;" ng-controller="homeCtrl">
+    <md-toolbar style="background:#2196f3;">
+        <div class="md-toolbar-tools">
+            <h2>STATS </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-font-set="material-icons" style="color:#fff;" aria-label="Close dialog"> close </md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <div class="gridListdemoBasicUsage">
+            <h3>Total Hits / Max Hits</h3>
+            <h3>{{quote_available}} / {{quote_max}}</h3>
+            <br><br>
+               <h3>Total Products</h3>
+            <h3>{{total}}</h3>
+        </div>
+    </md-content>
+    <div class="md-actions" layout="row"> <span flex></span>
+        <md-button class="md-primary" ng-click="cancel()"> OK </md-button>
+        <!-- <md-button ng-click="save(data)" class="md-primary"> Save </md-button> -->
+    </div>
+</md-dialog>

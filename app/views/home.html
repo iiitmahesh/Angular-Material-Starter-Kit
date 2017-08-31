@@ -1,0 +1,115 @@
+<md-content style="background: whitesmoke;">
+    <md-content>
+        <div class="md-padding" layout="row" style="padding-bottom:0px;">
+            <md-input-container md-no-float flex="30">
+                <label>Search</label>
+                <md-icon md-font-set="material-icons" class="searchInputIcon appThemecolor"> search </md-icon>
+                <input ng-model="searchText" type="text">
+            </md-input-container>
+            <md-input-container md-no-float flex="30">
+                <label>Search Options</label>
+                <md-select ng-model="selectedOption" multiple>
+                    <md-optgroup label="Basic">
+                        <md-option ng-value="option.name" ng-repeat="option in searchOptions | filter: {category: 'basic' }">{{option.name}}</md-option>
+                    </md-optgroup>
+                    <md-optgroup label="Advanced">
+                        <md-option ng-value="option.name" ng-repeat="option in searchOptions | filter: {category: 'adv' }">{{option.name}}</md-option>
+                    </md-optgroup>
+                </md-select>
+            </md-input-container>
+            <md-input-container md-no-float flex="40">
+                <md-button ng-disabled="true" style="min-width: auto;">Sort by: </md-button>
+                <md-button ng-click="sortBy('name')" style="min-width: auto;">Name</md-button>
+                <md-button ng-click="sortBy('price')" style="min-width: auto;">Price </md-button>
+                <md-button ng-click="sortBy('rating')" style="min-width: auto;">Rating</md-button>
+                <md-button ng-click="sortBy('category')" style="min-width: auto;">Category </md-button>
+            </md-input-container>
+        </div>
+    </md-content>
+    <md-button class="md-fab md-fab-top-right fab-custom1 appThemeBGcolor" aria-label="Add" ng-click="showAdd($event)">
+        <md-icon md-font-set="material-icons" style="color:#fff;"> graphic_eq </md-icon>
+        <md-tooltip>Stats</md-tooltip>
+    </md-button>
+    <div class='md-padding' style="padding-top:0px;" layout="row" layout-align="center" layout-wrap>
+        <md-card md-theme-watch ng-repeat="item in content |  filter:searchText " style="width:320px;">
+            <md-card-content style="padding:;">
+                <div class="card-media " id="over" layout="row">
+                    <img src="{{item.image}}" align="center" alt="favicon" width="240" height="240">
+                </div>
+                <md-card-title layout="row" style="color:;">
+                    <md-card-title-text style="text-align: center;overflow: hidden;">
+                        <span class="md-head" style="font-weight: bold;font-family:Raleway;color:#2196f3;">
+                            {{ item.name | uppercase }} 
+                        <md-tooltip md-direction="top">Name</md-tooltip>
+                        </span>
+                        <span>
+                        <p class="md-subhead" style="padding: 0px; text-align:center;font-size: 12px;">Quantity: {{item.quantity}}
+                                <md-tooltip>Provider </md-tooltip>
+                            </p>
+                        </span>
+                        <span>
+                        Color:
+                        <md-button class="md-fab md-mini " style="background-color: {{item.color}};" aria-label="Color">
+                            <md-icon md-svg-src="img/icons/android.svg" ></md-icon>
+                                <md-tooltip md-direction="top">Color</md-tooltip>
+                            
+                        </md-button>
+
+                        </span>
+                        <span>
+                        <p >
+                        <span  style="font-style: openSans" class="appThemecolor;">({{ item.rating }}) </span>
+                        <rating rate=item.rating></rating>
+                        </p>
+                        </span>
+                        <span class="md-subhead" style="padding-top: 15px; color:;font-size: 12px;"> 
+                            <span style="background: #ddd; padding: 2px 8px 3px 8px; border-radius: 0px; margin: 2px;" ng-repeat="tag in item.tags" ng-click="searchBytag(tag)">
+                                {{tag}}
+                            </span>
+                        </span>
+                        <span>
+                            <md-button class="md-warn" style="background:#E91E63; ">
+                                <a href="{{ item.link }}" style="color:#fff;text-decoration: none" target="_blank"> &#8377; {{item.price}} </a>
+                                <md-tooltip md-direction="top">Price</md-tooltip>
+                            </md-button>
+                        </span>
+                        <span>
+                        <p class="md-subhead" style="padding: 0px; text-align:left;font-size: 12px;" ng-show="item.id"> <span ng-click="showDes(item.id)">Description : </span> {{item.description}}
+                        <md-tooltip>Description </md-tooltip>
+                        </p>
+                        </span>
+                    </md-card-title-text>
+                </md-card-title>
+                </md-card-icon-actions>
+                <md-card-actions layout="row" layout-align="start center">
+                    <md-card-icon-actions>
+                        <md-button class="md-icon-button " style="background-color:;" ng-click="like(item.id)" ng-init="getlikes(item.id)">
+                            <md-icon md-font-set="material-icons" style="color:#777777;"> thumb_up </md-icon>
+                            <md-tooltip>Like</md-tooltip>
+                        </md-button>
+                        <md-button style="min-width: 10px !important;">
+                            <span style="color:#2196f3;">{{likes[item.id]}} </span>
+                            <md-tooltip>Likes</md-tooltip>
+                        </md-button>
+                        <md-button class="md-icon-button " style="background-color:;" ng-click="unlike(item.id)" ng-init="getlikes(item.id)">
+                            <md-icon md-font-set="material-icons" style="color:#777777;"> thumb_down </md-icon>
+                            <md-tooltip>Unlike</md-tooltip>
+                        </md-button>
+                        <md-button class="md-icon-button " style="background-color:;">
+                            <a href="{{ item.link }}" style="color:#fff;text-decoration: none" target="_blank">
+                                <md-icon md-font-set="material-icons" style="color:#777777;"> public </md-icon>
+                            </a>
+                            <md-tooltip>Website</md-tooltip>
+                        </md-button>
+                        <md-button class="md-icon-button " style="background-color:;">
+                            <a href="{{ item.link }}" style="color:#fff;text-decoration: none" target="_blank">
+                                <md-icon md-font-set="material-icons" style="color:#777777;"> place </md-icon>
+                            </a>
+                            <md-tooltip>Map</md-tooltip>
+                        </md-button>
+                    </md-card-icon-actions>
+                </md-card-actions>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>
